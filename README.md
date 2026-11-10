@@ -13,6 +13,7 @@ The JDK is pinned with SDKMAN in `setupEnv.sh` (21.0.6-zulu):
 source "$HOME/.sdkman/bin/sdkman-init.sh" && source ./setupEnv.sh
 ./gradlew run                 # start the app
 ./gradlew installDist         # build/install/s3explorer/bin/s3explorer
+./gradlew shadowJar           # fat jar: build/libs/s3explorer-<version>-all.jar (java -jar ...)
 ./gradlew test                # unit tests (integration tests skip without an endpoint)
 ```
 

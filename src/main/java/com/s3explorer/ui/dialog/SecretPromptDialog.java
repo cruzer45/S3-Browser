@@ -31,6 +31,7 @@ public final class SecretPromptDialog {
                         + profile.accessKeyId + ")."))
                 .row("Secret access key:", secret)
                 .row("Session token (optional):", token)
+                .wide(new JLabel("Leave the session token empty for permanent keys (access keys starting with AKIA)."))
                 .wide(remember);
         int choice = JOptionPane.showConfirmDialog(parent, form, "Credentials Required",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);

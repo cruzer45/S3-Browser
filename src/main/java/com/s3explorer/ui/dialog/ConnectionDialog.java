@@ -116,6 +116,7 @@ public final class ConnectionDialog extends JDialog {
         region.putClientProperty("JTextField.placeholderText", "us-east-1");
         pinnedBuckets.putClientProperty("JTextField.placeholderText", "bucket-a, bucket-b (optional)");
         pinnedBuckets.setToolTipText("Buckets to show when the credentials are not allowed to list all buckets.");
+        sessionToken.putClientProperty("JTextField.placeholderText", "Optional - only for temporary keys (ASIA...)");
         connectTimeout.setToolTipText("0 uses the value from Settings");
         requestTimeout.setToolTipText("0 uses the value from Settings");
 

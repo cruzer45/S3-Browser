@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id 'com.gradleup.shadow' version '9.2.2'
 }
 
 group = 'com.s3explorer'
@@ -45,6 +46,19 @@ tasks.withType(JavaCompile).configureEach {
 application {
     mainClass = 'com.s3explorer.app.Application'
     applicationName = 's3explorer'
+}
+
+tasks.named('shadowJar') {
+    // Produces build/libs/s3explorer-<version>-all.jar, runnable with `java -jar`.
+    archiveClassifier = 'all'
+    // The AWS SDK, logback and Jackson register implementations via ServiceLoader.
+    mergeServiceFiles()
+    manifest {
+        attributes 'Main-Class': application.mainClass.get(),
+                'Implementation-Title': 'S3 Explorer',
+                'Implementation-Version': project.version,
+                'Multi-Release': 'true'
+    }
 }
 
 tasks.named('test') {

@@ -47,8 +47,15 @@ public class S3BrowserService {
                 buckets.put(b.name(), new S3BucketInfo(b.name(), b.creationDate()));
             }
         } catch (S3Exception e) {
-            if (e.statusCode() != 403 || pinned.isEmpty()) {
+            if (e.statusCode() != 403) {
                 throw e;
+            }
+            if (pinned.isEmpty()) {
+                throw new com.s3explorer.util.UserFacingException("These credentials cannot list buckets.",
+                        "The credentials are valid but are not allowed to list all buckets "
+                                + "(s3:ListAllMyBuckets), which is common for keys scoped to one bucket. "
+                                + "Edit the connection and add the bucket name under \"Pinned buckets\", "
+                                + "or type s3://bucket-name/prefix/ in the path bar.");
             }
             log.info("ListBuckets denied for '{}'; showing pinned buckets only", connection.profile().name);
         }
